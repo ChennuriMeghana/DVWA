@@ -1,12 +1,6 @@
 pipeline {
     agent any
-  environment {
-      // SEMGREP_BASELINE_REF = ""
-
-        SEMGREP_APP_TOKEN = credentials('SEMGREP_APP_TOKEN')
-        SEMGREP_PR_ID = "${env.CHANGE_ID}"
-
-      //  SEMGREP_TIMEOUT = "300"
+    withCredentials([string(credentialsId: 'SEMGREP_APP_TOKEN', variable: 'SEMGREP_APP_TOKEN')]) {
     }
     stages {
       stage('Semgrep-Scan') {
